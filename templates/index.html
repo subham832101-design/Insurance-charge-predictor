@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insurance Cost Prediction</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background: linear-gradient(135deg,#4e73df,#1cc88a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    width:100%;
+    max-width:500px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.2);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#333;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+input,select{
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:14px;
+    transition:0.3s;
+}
+
+input:focus, select:focus{
+    border-color:#4e73df;
+    box-shadow:0 0 8px rgba(78,115,223,0.4);
+    outline:none;
+}
+
+button{
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#4e73df;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#2e59d9;
+    transform:scale(1.05);
+}
+
+.result{
+    margin-top:20px;
+    padding:12px;
+    text-align:center;
+    font-weight:600;
+    border-radius:8px;
+    background:#f8f9fc;
+    color:#333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Insurance Cost Prediction</h2>
+
+<form action="/predict" method="POST">
+
+    <input type="number" name="age" placeholder="Age" required>
+
+    <select name="is_female" required>
+        <option value="">Select Gender</option>
+        <option value="1">Female</option>
+        <option value="0">Male</option>
+    </select>
+
+    <input type="number" step="0.1" name="bmi" placeholder="BMI" required>
+
+    <input type="number" name="children" placeholder="Number of Children" required>
+
+    <select name="is_smoker" required>
+        <option value="">Smoker?</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <select name="region_southeast" required>
+        <option value="">Region Southeast?</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <select name="bmi_category_Obese" required>
+        <option value="">Obese?</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <button type="submit">Predict</button>
+
+</form>
+
+{% if prediction_text %}
+<div class="result">
+    {{ prediction_text }}
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
